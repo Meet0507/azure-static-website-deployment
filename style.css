@@ -1,0 +1,41 @@
+/* Import Google Fonts - Inter for a clean, modern look */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+/* Apply basic font and default styles */
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: #333; /* A dark grey for readability */
+}
+
+/* Add Tailwind CSS via CDN for rapid prototyping. 
+   In a real project, you'd build Tailwind locally. */
+@import url('https://cdn.tailwindcss.com');
+
+/* Custom styles can go below the Tailwind import if needed */
+/* For example, a basic container if not using mx-auto extensively */
+.container {
+    max-width: 1200px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Basic styling for links to ensure they are visible */
+a {
+    color: inherit; /* Inherit color from parent */
+    text-decoration: none; /* No underline by default */
+    transition: color 0.3s ease; /* Smooth color transition on hover */
+}
+
+a:hover {
+    color: #a0aec0; /* Lighter grey on hover */
+}
+
+/* Basic button hover effect if not fully covered by Tailwind */
+button {
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
