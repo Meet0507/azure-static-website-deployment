@@ -3,60 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meet's First Azure Website</title>
-    <p>This is a test update.</p>
+    <title>Meet Mehta - Azure Cloud & DevOps Portfolio</title>
+    <!-- Favicon placeholder (we'll generate/provide this later) -->
+    <link rel="icon" href="https://placehold.co/32x32/3498db/ffffff?text=MM" type="image/png">
     <link rel="stylesheet" href="style.css">
+    <!-- Link to Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons (if we decide to use them) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<body class="bg-gray-100 flex flex-col min-h-screen">
-    <header class="bg-blue-600 text-white p-6 shadow-md">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-3xl font-bold">Welcome to My Cloud Journey!</h1>
+<body>
+
+    <!-- Header Section: Your Name & Title -->
+    <header>
+        <div class="container">
+            <h1>Meet Mehta</h1>
+            <p>Azure Cloud Engineer | DevOps & Security Enthusiast</p>
             <nav>
-                <ul class="flex space-x-4">
-                    <li><a href="#" class="hover:underline text-lg">Home</a></li>
-                    <li><a href="#" class="hover:underline text-lg">About</a></li>
-                    <li><a href="#" class="hover:underline text-lg">Contact</a></li>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Me</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <main class="container mx-auto p-8 flex-grow">
-        <section class="bg-white rounded-lg shadow-lg p-8 mb-8">
-            <h2 class="text-2xl font-semibold text-blue-700 mb-4">Hello, Azure World!</h2>
-            <p class="text-gray-700 leading-relaxed mb-4">
-                This is my very first static website, deployed directly to Azure Storage. It's a huge step
-                in my journey to become an Azure DevOps Security Professional!
-            </p>
-            <p class="text-gray-600 leading-relaxed">
-                I'm learning about cloud engineering, infrastructure as code, and cybersecurity.
-                Stay tuned for more updates on my progress and projects!
-            </p>
-            <button id="myButton" class="mt-6 px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-300">
-                Click Me!
-            </button>
-            <p id="message" class="mt-4 text-green-700 font-medium"></p>
-        </section>
+    <!-- Home/Hero Section: A welcoming statement with background -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <h2>Welcome to My Portfolio</h2>
+            <p>Building secure, scalable, and automated cloud solutions on Microsoft Azure.</p>
+            <p>Explore my projects to see practical implementations of cloud engineering, DevOps, and security principles.</p>
+            <a href="#projects" class="btn">Explore My Work</a>
+        </div>
+    </section>
 
-        <section class="bg-white rounded-lg shadow-lg p-8">
-            <h2 class="text-2xl font-semibold text-blue-700 mb-4">My Learning Path</h2>
-            <ul class="list-disc list-inside text-gray-700">
-                <li class="mb-2">Azure Administration (AZ-104) - *Currently learning*</li>
-                <li class="mb-2">Infrastructure as Code (ARM Templates) - *Just mastered!*</li>
-                <li class="mb-2">DevOps Principles & Azure DevOps</li>
-                <li class="mb-2">Cloud Security Fundamentals</li>
-                <li class="mb-2">Python Scripting for Automation</li>
-            </ul>
-        </section>
-    </main>
+    <!-- About Me Section: Your background and aspirations with image -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>About Me</h2>
+                    <p>
+                        I am a highly motivated Cloud Engineer specializing in Modern Networks and Cloud Computing, holding a Post-Graduate Diploma from Lambton College, Canada, complemented by a Bachelor of Engineering in Computer Engineering. My passion lies in designing, implementing, and securing scalable cloud infrastructures, with a strong focus on DevOps principles and automation on Microsoft Azure.
+                    </p>
+                    <p>
+                        Through hands-on projects, I have cultivated demonstrable practical skills in global content delivery, robust web application security (including WAF implementation), and automated Continuous Integration/Continuous Deployment (CI/CD) pipelines. I am adept at configuring, optimizing, and troubleshooting enterprise-grade systems, ensuring compliance and enhancing performance.
+                    </p>
+                    <p>
+                        Equipped with a Post-Graduation Work Permit (PGWP), I am enthusiastically seeking an entry-level Cloud Engineer, DevOps Engineer, or IT Field Support role in Canada where I can contribute my comprehensive technical expertise, drive continuous improvement, and thrive within a dynamic organizational environment.
+                    </p>
+                </div>
+                <div class="about-image">
+                    <!-- Placeholder for your professional headshot.
+                         Replace 'your-professional-headshot.jpg' with the actual filename
+                         once you have it and upload it to your Storage Account.
+                         For now, using a placeholder from placehold.co -->
+                    <img src="Meet Portfolio image.jpeg" alt="Meet Mehta - Professional Headshot">
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <footer class="bg-gray-800 text-white p-4 text-center mt-auto shadow-inner">
-        <div class="container mx-auto">
+    <!-- Skills Section: List your technical proficiencies -->
+    <section id="skills" class="skills-section">
+        <div class="container">
+            <h2>My Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3><i class="fas fa-cloud"></i> Cloud Platforms & Services:</h3>
+                    <ul>
+                        <li>Microsoft Azure: Azure Storage (Blob, Static Website Hosting), Virtual Machines, Azure CLI, Azure Resource Manager (ARM) Templates, Azure Front Door (CDN, WAF), Azure Functions (conceptual).</li>
+                        <li>Cloud Concepts: IaaS, PaaS, SaaS, Hybrid Cloud, Scalability, High Availability, Disaster Recovery.</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-code-branch"></i> DevOps Tools & Practices:</h3>
+                    <ul>
+                        <li>Version Control: Git, GitHub (Repositories, Branching, Pull Requests).</li>
+                        <li>CI/CD: GitHub Actions (Automated Workflows, Secure Deployments), Continuous Integration, Continuous Deployment, Infrastructure as Code (IaC).</li>
+                        <li>[Potentially Terraform, Docker, Kubernetes - to be added later].</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-network-wired"></i> Networking & Infrastructure:</h3>
+                    <ul>
+                        <li>Network Architecture, VLAN, VTP, STP, OSPF, HSRP, ACLs, Wireless.</li>
+                        <li>Cisco Technologies: Packet Tracer, Catalyst Switches, Aironet APs, ASA Firewalls, IOS.</li>
+                        <li>Tools & Utilities: draw.io, CLI, Network Monitoring & Diagnostics.</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-shield-alt"></i> Operating Systems & Security:</h3>
+                    <ul>
+                        <li>Operating Systems: Windows Server, Linux, VMware.</li>
+                        <li>Security Compliance: HIPAA Compliance.</li>
+                        <li>Security Tools/Concepts: IDS/IPS (conceptual), Firewall Management, Web Application Firewall (WAF), HTTPS/SSL/TLS, Identity and Access Management (IAM - conceptual from AZ-104 study).</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-laptop-code"></i> Programming & Scripting:</h3>
+                    <ul>
+                        <li>Python (Foundational).</li>
+                        <li>PowerShell.</li>
+                        <li>Bash.</li>
+                        <li>Web Development Basics: HTML, CSS, JavaScript.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section: Showcase your work (MOST IMPORTANT) -->
+    <section id="projects" class="projects-section">
+        <div class="container">
+            <h2>My Projects</h2>
+
+            <!-- Project 1: Your Azure Static Website -->
+            <article class="project-card">
+                <h3>1. Azure Static Website Deployment & Hosting</h3>
+                <p><strong>Description:</strong> Designed and deployed a foundational static website on Azure Blob Storage, establishing a scalable and accessible web presence. This project served as a hands-on introduction to essential cloud infrastructure and deployment practices.</p>
+                <p><strong>Technologies Utilized:</strong> Azure (Storage, Blob Service, Static Website Hosting), ARM Templates, Azure CLI, PowerShell, Git, GitHub.</p>
+                <p><strong>Key Achievements & Skills Demonstrated:</strong></p>
+                <ul>
+                    <li>Successfully provisioned and configured Azure Storage Accounts and associated resources via ARM Templates.</li>
+                    <li>Managed and deployed web content efficiently to Azure Blob Storage using Azure CLI batch operations.</li>
+                    <li>Established robust version control practices for project code, ensuring traceability and collaboration.</li>
+                    <li>Gained practical experience in public cloud hosting setup and fundamental service configuration.</li>
+                </ul>
+                <div class="project-links">
+                    <a href="https://meetonlysa55231.z9.web.core.windows.net/" target="_blank" class="project-btn"><i class="fas fa-external-link-alt"></i> Live Project</a>
+                    <a href="https://github.com/Meet0507/azure-static-website-deployment.git" target="_blank" class="project-btn"><i class="fab fa-github"></i> GitHub Repo</a>
+                </div>
+            </article>
+
+            <!-- Placeholder for Future Project (Phase 2 Enhanced Website) -->
+            <article class="project-card">
+                <h3>2. Secure, Globally Distributed, & Automated Portfolio Website (Under Active Development)</h3>
+                <p><strong>Description:</strong> Actively transforming my foundational static website into an enterprise-grade, highly performant, and secure web application. This ongoing project focuses on implementing advanced cloud architecture, robust security measures, and automated deployment pipelines.</p>
+                <p><strong>Technologies I Am Implementing:</strong> Azure Front Door (CDN, WAF), Azure DNS, Custom Domains, GitHub Actions (CI/CD), Azure CLI.</p>
+                <p><strong>Expected Impact & Skills Gained:</strong></p>
+                <ul>
+                    <li>Demonstrating expertise in designing and deploying globally optimized web solutions.</li>
+                    <li>Practical application of edge security principles and WAF configuration for enhanced application defense.</li>
+                    <li>Proficiency in automating full-stack deployment workflows, crucial for DevOps roles.</li>
+                    <li>Experience in connecting custom domains and ensuring secure web access (HTTPS).</li>
+                </ul>
+                <p><strong>Project Status:</strong> Under active development, continuously integrating advanced cloud and DevOps principles.</p>
+                <div class="project-links">
+                    <span class="project-btn disabled"><i class="fas fa-hourglass-half"></i> Coming Soon</span>
+                </div>
+            </article>
+
+            <!-- Add more project articles here as you complete them -->
+
+        </div>
+    </section>
+
+    <!-- Contact Section: How to reach you -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2>Get in Touch</h2>
+            <p>I'm always open to discussing new opportunities or collaborating on exciting cloud, DevOps, and security projects.</p>
+            <div class="contact-links">
+                <p><i class="fas fa-envelope"></i> <strong>Email:</strong> <a href="mailto:mmeet0719@gmail.com">mmeet0719@gmail.com</a></p>
+                <p><i class="fab fa-linkedin"></i> <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/meet-mehta-" target="_blank">linkedin.com/in/meet-mehta-</a></p>
+                <p><i class="fab fa-github"></i> <strong>GitHub:</strong> <a href="https://github.com/Meet0507" target="_blank">github.com/Meet0507</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="container">
             <p>&copy; 2025 Meet Mehta. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- Optional: Link to a JavaScript file for interactivity -->
-    <script src="script.js"></script>
+    <!-- Simple JavaScript for Smooth Scrolling and subtle animations -->
+    <script>
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Simple fade-in animation for sections on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, { threshold: 0.1 }); // Trigger when 10% of element is visible
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+
 </body>
 </html>
