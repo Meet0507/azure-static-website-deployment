@@ -6,20 +6,471 @@
     <title>Meet Mehta - Azure Cloud & DevOps Portfolio</title>
     <!-- Favicon placeholder (we'll generate/provide this later) -->
     <link rel="icon" href="https://placehold.co/32x32/3498db/ffffff?text=MM" type="image/png">
-    <link rel="stylesheet" href="style.css">
-    <!-- Link to Google Fonts - Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome for Icons (if we decide to use them) -->
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Link to Google Fonts - Inter and Roboto Slab -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* General Body Styling & Font Import */
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            color: #333;
+            line-height: 1.6;
+            background-color: #f8fafc; /* Light blue-gray background */
+            scroll-behavior: smooth; /* Smooth scrolling for navigation */
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        header {
+            background-color: #1e3a8a; /* Darker blue header */
+            color: #ffffff;
+            padding: 1.5rem 0; /* Default padding - slightly increased for initial size */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            position: sticky; /* Make header sticky */
+            top: 0;
+            z-index: 1000; /* Ensure it stays on top */
+            transition: padding 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for shrinking */
+        }
+        header h1 {
+            font-family: 'Roboto Slab', serif;
+            font-size: 2.2rem; /* Default font size - slightly increased */
+            font-weight: 700;
+            margin: 0;
+            text-align: center;
+            transition: font-size 0.3s ease; /* Smooth transition for shrinking */
+        }
+        header p {
+            font-size: 1.1rem; /* Default font size - slightly increased */
+            text-align: center;
+            margin-top: 0.35rem; /* Adjusted margin */
+            opacity: 0.9;
+            transition: font-size 0.3s ease, margin-top 0.3s ease, opacity 0.3s ease; /* Smooth transition for shrinking */
+        }
+        header nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+            margin: 1.2rem 0 0; /* Default margin */
+            transition: margin 0.3s ease; /* Smooth transition for shrinking */
+        }
+        header nav ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 0.6rem 1.1rem; /* Adjusted padding */
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease;
+            font-weight: 600;
+            font-size: 1.05rem; /* Default font size */
+            transition: font-size 0.3s ease, padding 0.3s ease; /* Smooth transition for shrinking */
+        }
+        header nav ul li a:hover,
+        header nav ul li a.active {
+            background-color: #3b82f6; /* Blue-500 */
+        }
+
+        /* Styles for the shrunk header */
+        header.header-scrolled {
+            padding: 0.5rem 0; /* Reduced padding */
+            box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3); /* Slightly more prominent shadow */
+            background-color: #1a2c6a; /* Slightly darker when shrunk */
+        }
+        header.header-scrolled h1 {
+            font-size: 1.6rem; /* Reduced font size */
+        }
+        header.header-scrolled p {
+            font-size: 0.85rem; /* Reduced font size */
+            margin-top: 0.15rem; /* Reduced margin */
+            opacity: 0.7; /* Slightly more transparent */
+        }
+        header.header-scrolled nav ul {
+            margin: 0.6rem 0 0; /* Reduced margin */
+        }
+        header.header-scrolled nav ul li a {
+            font-size: 0.95rem; /* Reduced font size */
+            padding: 0.4rem 0.9rem; /* Reduced padding */
+        }
+
+
+        /* Hamburger menu icon styling */
+        .menu-toggle {
+            display: none; /* Hidden by default on desktop */
+            font-size: 1.8rem;
+            color: #ffffff;
+            cursor: pointer;
+            position: absolute;
+            right: 1rem;
+            top: 1.5rem;
+            z-index: 1001; /* Ensure it's above other elements */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            header .container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-items: center;
+                position: relative;
+            }
+            header h1, header p {
+                text-align: left;
+                margin-left: 1rem; /* Adjust for spacing */
+            }
+            header p {
+                font-size: 0.9rem;
+            }
+            .menu-toggle {
+                display: block; /* Show hamburger on mobile */
+            }
+            header nav {
+                width: 100%;
+                max-height: 0; /* Hide menu by default */
+                overflow: hidden;
+                transition: max-height 0.5s ease-in-out;
+                flex-basis: 100%; /* Take full width */
+            }
+            header nav.active {
+                max-height: 300px; /* Max height when active (adjust as needed) */
+            }
+            header nav ul {
+                flex-direction: column;
+                align-items: flex-start; /* Align menu items to the left */
+                padding: 1rem 0;
+                background-color: #1c337a; /* Slightly lighter background for dropdown */
+            }
+            header nav ul li {
+                width: 100%;
+                text-align: left;
+            }
+            header nav ul li a {
+                display: block;
+                padding: 0.75rem 1.5rem;
+                width: 100%;
+            }
+
+            /* Disable shrinking effect on mobile, as the menu collapses */
+            header.header-scrolled {
+                padding: 1.5rem 0; /* Reset to default padding for mobile */
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Reset shadow for mobile */
+                background-color: #1e3a8a; /* Reset background for mobile */
+            }
+            header.header-scrolled h1 {
+                font-size: 2.2rem; /* Reset to default font size for mobile */
+            }
+            header.header-scrolled p {
+                font-size: 1.1rem; /* Reset to default font size for mobile */
+                margin-top: 0.35rem;
+                opacity: 0.9;
+            }
+            header.header-scrolled nav ul {
+                margin: 1.2rem 0 0;
+            }
+            header.header-scrolled nav ul li a {
+                font-size: 1.05rem;
+                padding: 0.6rem 1.1rem;
+            }
+        }
+
+        /* Section common styles */
+        section {
+            padding: 4rem 0;
+            opacity: 0; /* For fade-in animation */
+            transform: translateY(20px); /* For fade-in animation */
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        section.fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        section:nth-child(odd) {
+            background-color: #ffffff;
+        }
+        section:nth-child(even) {
+            background-color: #f0f4f8; /* Light gray for even sections */
+        }
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2d3748; /* Dark grey heading */
+            text-align: center;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+        h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #3b82f6; /* Blue-500 underline */
+            margin: 0.75rem auto 0;
+            border-radius: 2px;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #3b82f6 0%, #1e3a8a 100%); /* Blue gradient */
+            color: #ffffff;
+            text-align: center;
+            padding: 6rem 0;
+        }
+        .hero-section h2 {
+            color: #ffffff;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .hero-section h2::after {
+            background-color: #ffffff;
+        }
+        .hero-section p {
+            font-size: 1.25rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+        .hero-section .btn {
+            background-color: #ffffff;
+            color: #1e3a8a;
+            padding: 0.8rem 2.5rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .hero-section .btn:hover {
+            background-color: #e0e7ff; /* Lighter blue on hover */
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* About Section */
+        .about-section .about-content {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .about-section .about-text {
+            flex: 2;
+        }
+        .about-section .about-text p {
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            color: #4a5568;
+        }
+        .about-section .about-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .about-section .about-image img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            border-radius: 50%;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            border: 5px solid #3b82f6; /* Blue border */
+        }
+        @media (max-width: 768px) {
+            .about-section .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .about-section .about-image {
+                order: -1; /* Move image above text on mobile */
+                margin-bottom: 2rem;
+            }
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .skill-category {
+            background-color: #ffffff;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+            transition: transform 0.3s ease;
+        }
+        .skill-category:hover {
+            transform: translateY(-5px);
+        }
+        .skill-category h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        .skill-category h3 i {
+            color: #3b82f6;
+            margin-right: 0.75rem;
+            font-size: 1.5rem;
+        }
+        .skill-category ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .skill-category ul li {
+            font-size: 0.95rem;
+            color: #4a5568;
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .skill-category ul li::before {
+            content: '✓'; /* Checkmark icon */
+            color: #10b981; /* Green checkmark */
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+        }
+
+        /* Projects Section */
+        .projects-section {
+            background-color: #f0f4f8;
+        }
+        .project-card {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2.5rem;
+            border: 1px solid #e2e8f0;
+            transition: transform 0.3s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        .project-card h3 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+        .project-card p {
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            color: #4a5568;
+        }
+        .project-card ul {
+            list-style: disc;
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .project-card ul li {
+            font-size: 0.95rem;
+            color: #4a5568;
+            margin-bottom: 0.4rem;
+        }
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .project-btn {
+            background-color: #3b82f6;
+            color: #ffffff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .project-btn:hover {
+            background-color: #2563eb;
+            transform: translateY(-2px);
+        }
+        .project-btn i {
+            margin-right: 0.5rem;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            text-align: center;
+        }
+        .contact-section p {
+            font-size: 1.1rem;
+            color: #4a5568;
+            margin-bottom: 2rem;
+        }
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .contact-links p {
+            font-size: 1rem;
+            color: #2d3748;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+        }
+        .contact-links p i {
+            color: #3b82f6;
+            margin-right: 0.75rem;
+            font-size: 1.25rem;
+        }
+        .contact-links p a {
+            color: #2b6cb0;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .contact-links p a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a202c; /* Dark footer */
+            color: #cbd5e0;
+            text-align: center;
+            padding: 1.5rem 0;
+            font-size: 0.9rem;
+            margin-top: 4rem;
+        }
+    </style>
 </head>
 <body>
 
     <!-- Header Section: Your Name & Title -->
-    <header>
+    <header id="main-header">
         <div class="container">
-            <h1>Meet Mehta</h1>
-            <p>Azure Cloud Engineer | DevOps & Security Enthusiast</p>
-            <nav>
+            <div>
+                <h1>Meet Mehta</h1>
+                <p>Cloud & DevOps Engineer | Network & Security Specialist</p>
+            </div>
+            <div class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav id="main-nav">
                 <ul>
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About Me</a></li>
@@ -35,8 +486,8 @@
     <section id="home" class="hero-section">
         <div class="container">
             <h2>Welcome to My Portfolio</h2>
-            <p>Building secure, scalable, and automated cloud solutions on Microsoft Azure.</p>
-            <p>Explore my projects to see practical implementations of cloud engineering, DevOps, and security principles.</p>
+            <p>Building secure, scalable, and automated cloud solutions across diverse IT infrastructures.</p>
+            <p>Explore my projects to see practical implementations of cloud engineering, DevOps, networking, and security principles.</p>
             <a href="#projects" class="btn">Explore My Work</a>
         </div>
     </section>
@@ -48,20 +499,17 @@
                 <div class="about-text">
                     <h2>About Me</h2>
                     <p>
-                        I am a highly motivated Cloud Engineer specializing in Modern Networks and Cloud Computing, holding a Post-Graduate Diploma from Lambton College, Canada, complemented by a Bachelor of Engineering in Computer Engineering. My passion lies in designing, implementing, and securing scalable cloud infrastructures, with a strong focus on DevOps principles and automation on Microsoft Azure.
+                        A highly analytical and proactive professional with a strong foundation in Computer Engineering and a Postgraduate Diploma in Modern Networks & Cloud Computing. I possess hands-on experience building, securing, and automating diverse cloud infrastructures.
                     </p>
                     <p>
-                        Through hands-on projects, I have cultivated demonstrable practical skills in global content delivery, robust web application security (including WAF implementation), and automated Continuous Integration/Continuous Deployment (CI/CD) pipelines. I am adept at configuring, optimizing, and troubleshooting enterprise-grade systems, ensuring compliance and enhancing performance.
+                        My expertise spans **DevOps principles**, **robust network design**, and **foundational cybersecurity practices**. Through hands-on projects, I have cultivated demonstrable practical skills in global content delivery, automated CI/CD pipelines, and analytical troubleshooting of complex network and cloud issues.
                     </p>
                     <p>
-                        Equipped with a Post-Graduation Work Permit (PGWP), I am enthusiastically seeking an entry-level Cloud Engineer, DevOps Engineer, or IT Field Support role in Canada where I can contribute my comprehensive technical expertise, drive continuous improvement, and thrive within a dynamic organizational environment.
+                        Equipped with a Post-Graduation Work Permit (PGWP), I am enthusiastically seeking an entry-level Cloud Engineering, DevOps, Network Engineering, or Cloud Security role in Canada where I can contribute my comprehensive technical expertise, drive continuous improvement, and thrive within a dynamic organizational environment.
                     </p>
                 </div>
                 <div class="about-image">
-                    <!-- Placeholder for your professional headshot.
-                         Replace 'your-professional-headshot.jpg' with the actual filename
-                         once you have it and upload it to your Storage Account.
-                         For now, using a placeholder from placehold.co -->
+                    <!-- Your professional headshot -->
                     <img src="Meet Portfolio image.jpeg" alt="Meet Mehta - Professional Headshot">
                 </div>
             </div>
@@ -74,43 +522,51 @@
             <h2>My Skills</h2>
             <div class="skills-grid">
                 <div class="skill-category">
-                    <h3><i class="fas fa-cloud"></i> Cloud Platforms & Services:</h3>
+                    <h3><i class="fas fa-cloud"></i> Cloud Platforms & Services</h3>
                     <ul>
-                        <li>Microsoft Azure: Azure Storage (Blob, Static Website Hosting), Virtual Machines, Azure CLI, Azure Resource Manager (ARM) Templates, Azure Front Door (CDN, WAF), Azure Functions (conceptual).</li>
-                        <li>Cloud Concepts: IaaS, PaaS, SaaS, Hybrid Cloud, Scalability, High Availability, Disaster Recovery.</li>
+                        <li>Azure (Static Web Apps, Blob Storage, DNS, Monitor, Functions, Front Door)</li>
+                        <li>Cloudflare</li>
+                        <li>Cloud Concepts: IaaS, PaaS, SaaS, Hybrid Cloud, Scalability, HA, DR</li>
                     </ul>
                 </div>
                 <div class="skill-category">
-                    <h3><i class="fas fa-code-branch"></i> DevOps Tools & Practices:</h3>
+                    <h3><i class="fas fa-code-branch"></i> DevOps & CI/CD</h3>
                     <ul>
-                        <li>Version Control: Git, GitHub (Repositories, Branching, Pull Requests).</li>
-                        <li>CI/CD: GitHub Actions (Automated Workflows, Secure Deployments), Continuous Integration, Continuous Deployment, Infrastructure as Code (IaC).</li>
-                        <li>[Potentially Terraform, Docker, Kubernetes - to be added later].</li>
+                        <li>GitHub Actions (CI/CD Pipelines, Automated Workflows)</li>
+                        <li>Git, GitHub (Version Control, Repos, Branching, PRs)</li>
+                        <li>Continuous Integration, Continuous Deployment</li>
+                        <li>Infrastructure as Code (IaC concepts)</li>
                     </ul>
                 </div>
                 <div class="skill-category">
-                    <h3><i class="fas fa-network-wired"></i> Networking & Infrastructure:</h3>
+                    <h3><i class="fas fa-shield-alt"></i> Security</h3>
                     <ul>
-                        <li>Network Architecture, VLAN, VTP, STP, OSPF, HSRP, ACLs, Wireless.</li>
-                        <li>Cisco Technologies: Packet Tracer, Catalyst Switches, Aironet APs, ASA Firewalls, IOS.</li>
-                        <li>Tools & Utilities: draw.io, CLI, Network Monitoring & Diagnostics.</li>
+                        <li>HTTPS/SSL/TLS, Web Application Security (WAF concepts)</li>
+                        <li>Network Security, IAM (concepts), HIPAA Standards</li>
+                        <li>Firewall Management, IDS/IPS (conceptual)</li>
                     </ul>
                 </div>
                 <div class="skill-category">
-                    <h3><i class="fas fa-shield-alt"></i> Operating Systems & Security:</h3>
+                    <h3><i class="fas fa-network-wired"></i> Networking & Infrastructure</h3>
                     <ul>
-                        <li>Operating Systems: Windows Server, Linux, VMware.</li>
-                        <li>Security Compliance: HIPAA Compliance.</li>
-                        <li>Security Tools/Concepts: IDS/IPS (conceptual), Firewall Management, Web Application Firewall (WAF), HTTPS/SSL/TLS, Identity and Access Management (IAM - conceptual from AZ-104 study).</li>
+                        <li>Network Architecture, Design, Configuration, Security</li>
+                        <li>VLAN, VTP, STP, OSPF, HSRP, ACLs, Wireless</li>
+                        <li>Cisco (Packet Tracer, Catalyst Switches, Aironet APs, ASA Firewalls, IOS)</li>
                     </ul>
                 </div>
                 <div class="skill-category">
-                    <h3><i class="fas fa-laptop-code"></i> Programming & Scripting:</h3>
+                    <h3><i class="fas fa-laptop-code"></i> Programming & Scripting</h3>
                     <ul>
-                        <li>Python (Foundational).</li>
-                        <li>PowerShell.</li>
-                        <li>Bash.</li>
-                        <li>Web Development Basics: HTML, CSS, JavaScript.</li>
+                        <li>Python (Foundational)</li>
+                        <li>PowerShell, Azure CLI</li>
+                        <li>Web Development Basics: HTML, CSS, JavaScript</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-tools"></i> Operating Systems & Tools</h3>
+                    <ul>
+                        <li>Windows Server, Linux, Virtualization (VMware)</li>
+                        <li>draw.io, MS Office, Network Monitoring & Diagnostics</li>
                     </ul>
                 </div>
             </div>
@@ -122,61 +578,95 @@
         <div class="container">
             <h2>My Projects</h2>
 
-            <!-- Project 1: Your Azure Static Website -->
+            <!-- Project 1: Secure, Globally Distributed, & Automated Portfolio Website -->
             <article class="project-card">
-                <h3>1. Azure Static Website Deployment & Hosting</h3>
-                <p><strong>Description:</strong> Designed and deployed a foundational static website on Azure Blob Storage, establishing a scalable and accessible web presence. This project served as a hands-on introduction to essential cloud infrastructure and deployment practices.</p>
-                <p><strong>Technologies Utilized:</strong> Azure (Storage, Blob Service, Static Website Hosting), ARM Templates, Azure CLI, PowerShell, Git, GitHub.</p>
+                <h3>Secure, Globally Distributed, & Automated Portfolio Website</h3>
+                <p><strong>Description:</strong> Transformed a foundational static website into an enterprise-grade, highly performant, and secure web application. This project focused on implementing advanced cloud architecture, robust security measures, and automated deployment pipelines, now fully operational.</p>
                 <p><strong>Key Achievements & Skills Demonstrated:</strong></p>
                 <ul>
-                    <li>Successfully provisioned and configured Azure Storage Accounts and associated resources via ARM Templates.</li>
-                    <li>Managed and deployed web content efficiently to Azure Blob Storage using Azure CLI batch operations.</li>
-                    <li>Established robust version control practices for project code, ensuring traceability and collaboration.</li>
-                    <li>Gained practical experience in public cloud hosting setup and fundamental service configuration.</li>
+                    <li>Designed and launched a professional static portfolio website (`https://meetops.cloud`) on Azure Static Web Apps, ensuring global accessibility and strong performance.</li>
+                    <li>Built and deployed a full CI/CD pipeline using GitHub Actions, automating site updates with every `git push` for efficient, continuous delivery.</li>
+                    <li>Implemented robust HTTPS encryption by integrating custom domain mapping and leveraging Azure's built-in SSL/TLS certificate provisioning.</li>
+                    <li>Resolved complex HTTP Host header mismatch issues during initial Azure Blob Storage integration with Cloudflare, showcasing strong analytical and troubleshooting skills in web protocols and DNS.</li>
+                    <li>Demonstrated practical architectural decision-making by selecting Azure Static Web Apps as the optimal service to overcome deployment challenges and meet project goals.</li>
                 </ul>
                 <div class="project-links">
-                    <a href="https://meetonlysa55231.z9.web.core.windows.net/" target="_blank" class="project-btn"><i class="fas fa-external-link-alt"></i> Live Project</a>
-                    <a href="https://github.com/Meet0507/azure-static-website-deployment.git" target="_blank" class="project-btn"><i class="fab fa-github"></i> GitHub Repo</a>
+                    <a href="https://meetops.cloud" target="_blank" class="project-btn"><i class="fas fa-external-link-alt"></i> Live Project</a>
+                    <a href="https://github.com/mmeet0719/azure-static-website-deployment" target="_blank" class="project-btn"><i class="fab fa-github"></i> GitHub Repo</a>
                 </div>
             </article>
 
-            <!-- Placeholder for Future Project (Phase 2 Enhanced Website) -->
+            <!-- Project 2: Capstone Project: Network Design for Apollo Hospital -->
             <article class="project-card">
-                <h3>2. Secure, Globally Distributed, & Automated Portfolio Website </h3>
-                <p><strong>Description:</strong> Transformed a foundational static website into an enterprise-grade, highly performant, and secure web application. This project focused on implementing advanced cloud architecture, robust security measures, and automated deployment pipelines, now fully operational.</p>
-                <p><strong>Technologies Implemented:</strong>  Azure Static Web Apps, Azure DNS, Custom Domains, GitHub Actions (CI/CD), Cloudflare, HTTPS/SSL/TLS.</p>
-                <p><strong>Key Achievements & Skills Demonstrated::</strong></p>
+                <h3>Capstone Project: Network Design for Apollo Hospital</h3>
+                <p><strong>Description:</strong> Architected and implemented a secure, scalable network infrastructure for a healthcare facility, supporting approximately 200 users and 300 devices.</p>
+                <p><strong>Key Achievements & Skills Demonstrated:</strong></p>
                 <ul>
-                    <li>Successfully mapped a custom domain (`https://meetops.cloud`) to the application, enhancing professional branding.</li>
-                    <li>Implemented robust HTTPS encryption via integrated SSL/TLS certificates, ensuring secure data transit.</li>
-                    <li>Established an automated CI/CD pipeline using GitHub Actions, enabling continuous, efficient deployments.</li>
-                    <li>Achieved global content distribution and CDN-like performance through Azure Static Web Apps.</li>
-                    <li>Demonstrated advanced troubleshooting and strategic decision-making in selecting optimal cloud services.</li>
+                    <li>Configured advanced protocols (VLAN, OSPF, HSRP, ACLs) across 5 virtual routers & 8 switches using Cisco Packet Tracer, ensuring high availability, security, and HIPAA compliance.</li>
+                    <li>Collaborated within a 4-member team to deliver a cost-effective, high-performance network solution that optimized data flow and enhanced network resilience.</li>
                 </ul>
-               
-    Project Status: Phase 2 Complete! Successfully deployed on a custom domain (meetops.cloud) with HTTPS and automated CI/CD via GitHub Actions. Further enhancements under active development.
-</p>
-
-
                 <div class="project-links">
-                    <a href="https://meetops.cloud/" target="_blank" class="project-btn"><i class="fas fa-external-link-alt"></i> Live Project</a>
-                    <a href="https://github.com/Meet0507/azure-static-website-deployment.git" target="_blank" class="project-btn"><i class="fab fa-github"></i> GitHub Repo</a>
-                </div>
-            </article>
-                
+                    <!-- Assuming no live link or repo for Capstone, add if available -->
+                    <!-- <a href="#" target="_blank" class="project-btn"><i class="fas fa-external-link-alt"></i> View Project</a> -->
+                    <!-- <a href="#" target="_blank" class="project-btn"><i class="fab fa-github"></i> GitHub Repo</a> -->
                 </div>
             </article>
 
-            <!-- Add more project articles here as you complete them -->
+            <!-- Project 3: Networking Intern Experience - treated as a project for skills showcase -->
+            <article class="project-card">
+                <h3>Networking Intern Experience</h3>
+                <p><strong>Organization:</strong> Shree Drashti Infotech LLP | **Duration:** Jan 2022 – Jun 2022</p>
+                <p><strong>Key Achievements & Skills Demonstrated:</strong></p>
+                <ul>
+                    <li>Configured Cisco routers and switches, implementing VLANs, OSPF, HSRP, ACLs, and firewall security to enhance network performance and security.</li>
+                    <li>Assisted in troubleshooting network issues, resolving latency, and improving system performance to ensure high availability.</li>
+                    <li>Conducted network audits and data validation, identifying security vulnerabilities and optimizing configurations.</li>
+                    <li>Created network diagrams using Cisco Packet Tracer and draw.io, ensuring clear documentation and scalability for enterprise networks.</li>
+                </ul>
+                <div class="project-links">
+                    <!-- Add links if available -->
+                </div>
+            </article>
 
         </div>
     </section>
 
-    <!-- Contact Section: How to reach you -->
+    <!-- Education Section -->
+    <section id="education" class="education-section">
+        <div class="container">
+            <h2>Education</h2>
+            <div class="education-item">
+                <div class="education-degree">Postgraduate Diploma - Modern Networks and Cloud Computing</div>
+                <div class="education-school-date">Lambton College, Mississauga, ON | Sep 2023 - Apr 2025</div>
+                <div class="text-gray-600 text-sm mt-1">Relevant Coursework: Enterprise Network Design, **Cloud Security**, **Network Automation**, Cloud Infrastructure Management.</div>
+            </div>
+            <div class="education-item">
+                <div class="education-degree">Bachelor of Engineering - Computer Engineering</div>
+                <div class="education-school-date">Gujarat Technological University, Ahmedabad, India | Jun 2018 - May 2022</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Soft Skills Section -->
+    <section id="soft-skills" class="soft-skills-section">
+        <div class="container">
+            <h2>Soft Skills</h2>
+            <div class="soft-skills-list">
+                <span>Communication</span>
+                <span>Team Collaboration</span>
+                <span>Problem Solving</span>
+                <span>Technical Documentation</span>
+                <span>Adaptability</span>
+                <span>Time Management</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
     <section id="contact" class="contact-section">
         <div class="container">
             <h2>Get in Touch</h2>
-            <p>I'm always open to discussing new opportunities or collaborating on exciting cloud, DevOps, and security projects.</p>
+            <p>I'm always open to discussing new opportunities or collaborating on exciting cloud, DevOps, networking, and security projects.</p>
             <div class="contact-links">
                 <p><i class="fas fa-envelope"></i> <strong>Email:</strong> <a href="mailto:mmeet0719@gmail.com">mmeet0719@gmail.com</a></p>
                 <p><i class="fab fa-linkedin"></i> <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/meet-mehta-" target="_blank">linkedin.com/in/meet-mehta-</a></p>
@@ -215,6 +705,34 @@
         document.querySelectorAll('section').forEach(section => {
             observer.observe(section);
         });
+
+        // Responsive Navbar Toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const mainNav = document.getElementById('main-nav');
+        const mainHeader = document.getElementById('main-header'); // Get the header element
+
+        if (menuToggle && mainNav && mainHeader) {
+            menuToggle.addEventListener('click', () => {
+                mainNav.classList.toggle('active');
+            });
+            // Close menu when a link is clicked (for mobile)
+            mainNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (mainNav.classList.contains('active')) {
+                        mainNav.classList.remove('active');
+                    }
+                });
+            });
+
+            // Shrinking header on scroll
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) { // Adjust this value as needed
+                    mainHeader.classList.add('header-scrolled');
+                } else {
+                    mainHeader.classList.remove('header-scrolled');
+                }
+            });
+        }
     </script>
 
 </body>
